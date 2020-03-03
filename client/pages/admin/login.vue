@@ -19,11 +19,11 @@
                   />
                   <v-text-field
                     id="password"
+                    v-model="password"
                     label="Парола"
                     name="password"
                     prepend-icon="lock"
                     type="password"
-                    v-model="password"
                   />
                 </v-form>
               </v-card-text>
@@ -42,22 +42,19 @@
 <script>
 export default {
   layout: 'empty',
-  props: {
-    source: String
-  },
   data: () => ({
     email: null,
     password: null
   }),
   methods: {
-    async login() {
+    login() {
       this.$auth.login({
         data: {
           email: this.email,
           password: this.password
         }
-      });
-      
+      })
+
       // await this.$axios.$post('auth/login', {
       //   email: this.email,
       //   password: this.password

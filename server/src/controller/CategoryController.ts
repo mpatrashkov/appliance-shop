@@ -6,8 +6,13 @@ class CategoryController {
     categoryRepository = getRepository(Category)
 
     getAll = async (req: Request, res: Response) => {
-        const categories = this.categoryRepository.find({
-            relations: ["children"]
+        const categories = await this.categoryRepository.find({
+            relations: ["children"],
+            where: {
+                parent: {
+                    id: null
+                }
+            }
         })
 
         res.send(categories)

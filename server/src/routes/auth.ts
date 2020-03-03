@@ -7,11 +7,9 @@ const router = Router()
 router.post("/login", AuthController.login)
 router.post("/logout", () => {})
 router.get("/user", [checkJwt], (req, res) => {
-    console.log(res.locals.jwtPayload)
     res.send({
         user: {
-            name: "Admin",
-            age: 17
+            email: res.locals.jwtPayload.email
         }
     })
 })

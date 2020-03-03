@@ -32,6 +32,15 @@ export default {
 }
 </script>
 
+<style lang="scss">
+body {
+  padding-top: $header-height;
+  @include md-up {
+    padding-top: 0;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .header {
   & {
