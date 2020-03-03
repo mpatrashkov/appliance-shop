@@ -10,6 +10,7 @@ class AuthController {
         let { email, password } = req.body
         if (!(email && password)) {
             res.status(400).send()
+            return
         }
 
         //Get user from database
@@ -19,6 +20,7 @@ class AuthController {
             admin = await adminRepository.findOneOrFail({ where: { email } })
         } catch (error) {
             res.status(401).send()
+            return
         }
 
         //Check if encrypted password match
@@ -35,7 +37,7 @@ class AuthController {
         )
 
         //Send the jwt in the response
-        res.send(token)
+        res.send({ token })
     }
 }
 

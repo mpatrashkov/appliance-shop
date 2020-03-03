@@ -4,8 +4,9 @@ import * as express from "express"
 import * as bodyParser from "body-parser"
 import helmet = require("helmet")
 import * as cors from "cors"
-
 require("dotenv").config()
+import { port } from "./config"
+import routes from "./routes"
 
 createConnection()
     .then(async connection => {
@@ -15,14 +16,16 @@ createConnection()
         app.use(helmet())
         app.use(bodyParser.json())
 
+        app.use(routes)
+
         // setup express app here
         // ...
 
         // start express server
-        app.listen(3000)
+        app.listen(port)
 
         console.log(
-            "Express server has started on port 3000. Open http://localhost:3000/users to see results"
+            `Express server has started on port ${port}. Open http://localhost:${port}/users to see results`
         )
     })
     .catch(error => console.log(error))
