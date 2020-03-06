@@ -11,9 +11,13 @@
     </div>
     <div class="header--menu" :class="{ 'header--menu__opened': menuOpened }">
       <div class="header--items">
-        <div class="header--item border-bottom p-3">Home</div>
+        <nuxt-link to="/" class="header--item border-bottom p-3"
+          >Home</nuxt-link
+        >
         <div class="header--item border-bottom p-3">Search</div>
-        <div class="header--item border-bottom p-3">Buy</div>
+        <nuxt-link to="/buy" class="header--item border-bottom p-3"
+          >Buy</nuxt-link
+        >
       </div>
     </div>
   </nav>

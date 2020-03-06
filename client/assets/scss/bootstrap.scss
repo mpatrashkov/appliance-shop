@@ -1,7 +1,52 @@
-@import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap-vue/src/index.scss';
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-vue/src/index.scss";
+@import 'bootstrap-slider/dist/css/bootstrap-slider.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 .material-icons {
   cursor: pointer;
   user-select: none;
 }
+
+.content {
+  width: 70rem;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.filters .d-inline-block{
+    display: block !important;
+    
+}
+
+.slider {
+    width: 100% !important;
+  }
+
+.slider-selection {
+    background-image: none !important;
+    background: #A7C5DA !important;
+    border: 1px solid $secondary-pale-color;
+}
+
+.slider-track-low, .slider-track-high {
+    background-image: none !important;
+    background: #FFF;
+    border: 1px solid $secondary-pale-color;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+@include sm-up;
+@include md-up;
+@include lg-up;
+@include xl-up;

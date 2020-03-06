@@ -1,22 +1,37 @@
 $header-height: 60px;
+$primary-pale-color: #E8ECEF;
+$secondary-pale-color: #E2E6E9;
+$small-border-radius: 5px;
 
 @mixin sm-up {
   @media (min-width: 576px) {
+    html, body {
+        font-size: 10px !important;
+      }
     @content;
   }
 }
 @mixin md-up {
   @media (min-width: 768px) {
+    html, body {
+        font-size: 12px !important;
+      }
     @content;
   }
 }
 @mixin lg-up {
   @media (min-width: 992px) {
+    html, body {
+        font-size: 14px !important;
+      }
     @content;
   }
 }
 @mixin xl-up {
   @media (min-width: 1200px) {
+    html, body {
+        font-size: 16px !important;
+      }
     @content;
   }
 }
