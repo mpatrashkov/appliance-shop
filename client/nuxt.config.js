@@ -16,7 +16,14 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://unpkg.com/vue-range-component@1.0.3/dist/vue-range-slider.min.css'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -50,7 +57,8 @@ export default {
     '@nuxtjs/style-resources',
     'nuxt-material-design-icons',
     '@nuxtjs/vuetify',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    'nuxt-bootstrap-slider'
   ],
   bootstrapVue: {
     bootstrapCSS: false,
