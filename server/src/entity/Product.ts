@@ -9,6 +9,7 @@ import {
 } from "typeorm"
 import { Model } from "./Model"
 import { DynamicOptionValue } from "./DynamicOptionValue"
+import { Category } from "./Category"
 
 @Entity()
 export class Product {
@@ -24,11 +25,17 @@ export class Product {
     @Column()
     description: string
 
+    @Column({ nullable: true })
+    image: string
+
     @Column()
     archived: boolean
 
     @Column()
     deleted: boolean
+
+    @ManyToOne(type => Category)
+    category: Category
 
     @ManyToOne(type => Model)
     model: Model

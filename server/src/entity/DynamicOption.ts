@@ -15,7 +15,7 @@ export class DynamicOption {
     @Column()
     name: string
 
-    @Column()
+    @Column({ nullable: true })
     suffix: string
 
     @Column()
