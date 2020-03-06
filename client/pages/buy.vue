@@ -1,9 +1,14 @@
 <template>
   <div class="buy-page">
-    <h1 class="buy-page-title">All Products</h1>
+    <h1 class="buy-page-title">Всички Продукти</h1>
     <div class="buy-page-content">
       <div class="buy-page-content-products">
-        <ProductCard v-for="item in items" :key="item" :img="img" />
+        <ProductCard
+          v-for="item in items"
+          :key="item.id"
+          :img="img"
+          :item="item"
+        />
       </div>
 
       <b-pagination-nav
@@ -23,11 +28,15 @@ export default {
   components: {
     ProductCard
   },
+  asyncData: async ({ $axios }) => {
+    const products = (await $axios.get('/products')).data
+    return {
+      items: products
+    }
+  },
   data: () => ({
-    items: 18,
     pages: 10,
-    img:
-      'https://s12emagst.akamaized.net/products/22495/22494116/images/res_2617ed635c7737bf1b9215124dd4dd69_full.jpg'
+    img: 'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
   }),
   layout: 'buy',
   watch: {
@@ -40,10 +49,10 @@ export default {
     const myParam = urlParams.get('page')
     if (myParam === '1' || myParam === null) {
       this.img =
-        'https://s12emagst.akamaized.net/products/22495/22494116/images/res_2617ed635c7737bf1b9215124dd4dd69_full.jpg'
+        'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
     } else if (myParam === '2') {
       this.img =
-        'https://s12emagst.akamaized.net/products/674/673302/images/res_2a9d2f7f03e2b4716e50b98a31b58c34_full.jpg'
+        'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
     }
   },
   beforeUpdate() {
@@ -51,10 +60,10 @@ export default {
     const myParam = urlParams.get('page')
     if (myParam === '1' || myParam === null) {
       this.img =
-        'https://s12emagst.akamaized.net/products/22495/22494116/images/res_2617ed635c7737bf1b9215124dd4dd69_full.jpg'
+        'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
     } else if (myParam === '2') {
       this.img =
-        'https://s12emagst.akamaized.net/products/674/673302/images/res_2a9d2f7f03e2b4716e50b98a31b58c34_full.jpg'
+        'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
     }
   },
   methods: {

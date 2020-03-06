@@ -110,7 +110,6 @@ export default {
       this.items = (
         await this.$axios.get(`/${this.resource}/${id}`)
       ).data.children.map((item) => this.mapItem(item))
-      console.log(this.items)
     } else {
       this.items = (
         await this.$axios.get(`/${this.resource}`)
@@ -141,8 +140,6 @@ export default {
         const index = this.items.indexOf(
           this.items.find((item) => item.id === this.editedItem.id)
         )
-
-        console.log(this.editedItem)
 
         await this.$axios.put(
           `/${this.resource}/${this.editedItem.id}`,

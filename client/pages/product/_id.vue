@@ -1,55 +1,71 @@
 <template>
   <div class="product-page content">
     <div class="product-page-title">
-      <h1>Смартфон Huawei P Smart (2019), Dual SIM, 64GB, 4G</h1>
+      <h1>{{ displayName }}</h1>
     </div>
     <div class="product-page-content">
       <div class="product-page-content-img">
-        <b-img-lazy
-          src="https://s12emagst.akamaized.net/products/22495/22494116/images/res_2617ed635c7737bf1b9215124dd4dd69_full.jpg"
-        ></b-img-lazy>
+        <b-img-lazy :src="img"></b-img-lazy>
       </div>
       <div class="product-page-content-info">
         <div>
-          <h4>Basic Information</h4>
+          <h4>Основна информация</h4>
           <b-table-simple>
-            <b-tr v-for="(info, index) in information" :key="index">
-              <b-th v-for="(value, name) in info" :key="name">{{
-                name.charAt(0).toUpperCase() + name.slice(1)
-              }}</b-th>
-              <b-td v-for="value in info" :key="value"> {{ value }}</b-td>
+            <b-tr>
+              <b-th class="w-226">Марка</b-th>
+              <b-td>{{ item.model.brand.name }}</b-td>
+            </b-tr>
+            <b-tr>
+              <b-th class="w-226">Модел</b-th>
+              <b-td>{{ item.model.name }}</b-td>
+            </b-tr>
+            <b-tr>
+              <b-th class="w-226">Категория</b-th>
+              <b-td>{{
+                item.category.parent.name + ' / ' + item.category.name
+              }}</b-td>
             </b-tr>
           </b-table-simple>
         </div>
         <div>
-          <h4>Additional Information</h4>
+          <h4>Допълнителна информация</h4>
           <b-table-simple>
-            <b-tr v-for="(info, index) in information" :key="index">
-              <b-th v-for="(value, name) in info" :key="name">{{
-                name.charAt(0).toUpperCase() + name.slice(1)
+            <b-tr
+              v-for="(dynamicOptionValue, index) in item.dynamicOptionsValues"
+              :key="index"
+            >
+              <b-th class="w-226">{{
+                dynamicOptionValue.dynamicOption.name
               }}</b-th>
-              <b-td v-for="value in info" :key="value"> {{ value }}</b-td>
+              <b-td>{{ dynamicOptionValue.value }}</b-td>
             </b-tr>
           </b-table-simple>
+          <div class="mt-2">
+            Телефон за връзка:
+            <a href="tel:+359 886 400 380">+359 886 400 380</a>
+          </div>
         </div>
       </div>
       <div class="product-page-content-buy">
         <div class="product-page-content-buy-price">
-          Price: 199<sup>99</sup> $
+          Цена: {{ item.price }} лв
         </div>
         <p class="product-page-content-buy-desc">
-          <strong>Description: </strong> ipsum dolor sit amet consectetur
-          adipisicing elit. Maiores vel mollitia ducimus distinctio, facilis
-          quam aut obcaecati sit hic accusantium? Reprehenderit voluptates eos
-          totam sed! Veniam deleniti alias placeat provident!
+          <strong>Описание: </strong> {{ item.description }}
         </p>
       </div>
     </div>
     <div class="product-page-similar">
+      <ProductCard
+        v-for="similarItem in item.similarProducts"
+        :key="similarItem.id"
+        :img="img"
+        :item="similarItem"
+      />
+      <!-- <ProductCard :img="img" />
       <ProductCard :img="img" />
       <ProductCard :img="img" />
-      <ProductCard :img="img" />
-      <ProductCard :img="img" />
+      <ProductCard :img="img" /> -->
     </div>
   </div>
 </template>
@@ -64,6 +80,13 @@ export default {
   validate({ params }) {
     return !(params.id === undefined)
   },
+  asyncData: async ({ params, $axios }) => {
+    const { id } = params
+    const product = (await $axios.get('/products/' + id)).data
+    return {
+      item: product
+    }
+  },
   data: () => ({
     information: [
       { size: '69.7 x 147.4 x 8.4 мм' },
@@ -76,13 +99,21 @@ export default {
       { inches: 5.8 },
       { USB: 'Type C' }
     ],
-    img:
-      'https://s12emagst.akamaized.net/products/22495/22494116/images/res_2617ed635c7737bf1b9215124dd4dd69_full.jpg'
-  })
+    img: 'https://www.piero.bg/image/cache/1e6dbd2e0976755a6e17af3efcd16924.jpg'
+  }),
+  computed: {
+    displayName() {
+      return this.item.model.brand.name + ' ' + this.item.model.name
+    }
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.w-226 {
+  width: 226px;
+}
+
 .content.product-page {
   flex-direction: column !important;
 }

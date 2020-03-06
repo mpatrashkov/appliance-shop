@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { Product } from "../entity/Product"
-import { getRepository } from "typeorm"
+import { getRepository, Not } from "typeorm"
 import { Model } from "../entity/Model"
 import { Category } from "../entity/Category"
 import { DynamicOptionValue } from "../entity/DynamicOptionValue"
@@ -28,6 +28,46 @@ class ProductController {
             }
         })
         res.send(products)
+    }
+
+    getOne = async (req: Request, res: Response) => {
+        const { id } = req.params
+        const product = await this.productRepository.findOne({
+            relations: [
+                "category",
+                "category.parent",
+                "model",
+                "model.brand",
+                "dynamicOptionsValues",
+                "dynamicOptionsValues.dynamicOption"
+            ],
+            where: {
+                id
+            }
+        })
+
+        const similarProducts = await this.productRepository.find({
+            relations: [
+                "category",
+                "category.parent",
+                "model",
+                "model.brand",
+                "dynamicOptionsValues",
+                "dynamicOptionsValues.dynamicOption"
+            ],
+            where: {
+                category: {
+                    id: product.category.id
+                },
+                id: Not(id)
+            },
+            take: 4
+        })
+
+        res.send({
+            ...product,
+            similarProducts
+        })
     }
 
     add = async (req: Request, res: Response) => {

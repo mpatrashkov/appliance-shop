@@ -1,22 +1,21 @@
 <template>
   <nav class="header px-2 border-bottom">
     <div class="header--logo">
-      Logo
+      Лого
     </div>
-    <div class="header--search-button">
+    <!-- <div class="header--search-button">
       <i class="material-icons">search</i>
-    </div>
+    </div> -->
     <div class="header--menu-button pl-4" @click="toggleMenu">
       <i class="material-icons">menu</i>
     </div>
     <div class="header--menu" :class="{ 'header--menu__opened': menuOpened }">
       <div class="header--items">
         <nuxt-link to="/" class="header--item border-bottom p-3"
-          >Home</nuxt-link
+          >Начало</nuxt-link
         >
-        <div class="header--item border-bottom p-3">Search</div>
         <nuxt-link to="/buy" class="header--item border-bottom p-3"
-          >Buy</nuxt-link
+          >Продукти</nuxt-link
         >
       </div>
     </div>
@@ -82,6 +81,7 @@ body {
     order: 4;
 
     display: flex;
+    margin-left: auto;
 
     @include md-up {
       display: none;
