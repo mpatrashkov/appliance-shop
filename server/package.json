@@ -29,6 +29,9 @@
     },
     "scripts": {
         "start": "ts-node src/index.ts",
-        "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
+        "dev": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+        "prod": "tsc && node ./build/app.js",
+        "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+        "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert"
     }
 }

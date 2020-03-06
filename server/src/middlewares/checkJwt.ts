@@ -4,6 +4,11 @@ import { jwtSecret } from "../config"
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     //Get the jwt token from the head
+    if (!req.headers.authorization) {
+        res.sendStatus(401)
+        return
+    }
+
     const token = <string>req.headers.authorization.replace("Bearer ", "")
     let jwtPayload
 
