@@ -11,7 +11,10 @@ export class Model {
 
     @ManyToOne(
         type => Brand,
-        brand => brand.models
+        brand => brand.models,
+        {
+            onDelete: "CASCADE"
+        }
     )
     brand: Brand
 }

@@ -13,6 +13,8 @@ export class DynamicOptionValue {
     @ManyToOne(type => DynamicOption, { cascade: true })
     dynamicOption: DynamicOption
 
-    @ManyToOne(type => Product)
+    @ManyToOne(type => Product, {
+        onDelete: "CASCADE"
+    })
     product: Product
 }

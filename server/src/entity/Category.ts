@@ -32,7 +32,9 @@ export class Category {
     )
     children: Category[]
 
-    @ManyToMany(type => DynamicOption)
+    @ManyToMany(type => DynamicOption, {
+        cascade: true
+    })
     @JoinTable()
     dynamicOptions: DynamicOption[]
 }

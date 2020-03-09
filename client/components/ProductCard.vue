@@ -6,20 +6,20 @@
           class="buy-page-content-products-product-body-img"
           :src="img"
         ></b-card-img-lazy>
-        <b-card-title class="buy-page-content-products-product-title"
-          >Смартфон Huawei P Smart (2019), Dual SIM, 64GB, 4G</b-card-title
-        >
+        <b-card-title class="buy-page-content-products-product-title">{{
+          displayName
+        }}</b-card-title>
         <b-card-text class="buy-page-content-products-product-body-text">
-          <span>In Stock</span>
-          <p>Price: 199<sup>99</sup> $</p>
+          <span>В наличност</span>
+          <p>Цена: {{ item.price }} лв</p>
         </b-card-text>
       </b-card-body>
       <b-card-footer class="buy-page-content-products-product-footer">
         <nuxt-link
-          to="/product/as"
+          :to="'/product/' + item.id"
           class="btn btn-primary buy-page-content-products-product-footer-btn"
           variant="primary"
-          >View More</nuxt-link
+          >Виж още</nuxt-link
         >
       </b-card-footer>
     </b-card>
@@ -32,6 +32,15 @@ export default {
     img: {
       type: String,
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  computed: {
+    displayName() {
+      return this.item.model.brand.name + ' ' + this.item.model.name
     }
   }
 }
